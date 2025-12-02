@@ -1,0 +1,8 @@
+Parse Input Data (Done)
+
+for each turn:
+    add (int)(TurnValue / 100) to ZerosPassed
+    Add TurnValue % 100 to dial
+    Recalibrate dial
+    if dialValue == 0:
+        add 1 to ZerosPassed
