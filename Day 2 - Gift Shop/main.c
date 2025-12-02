@@ -69,7 +69,7 @@ int main(void)
     size_t fileSize = 0;
     char* fileContents = GetInputFileContents(&fileSize);
 
-    char buffer[10] = {0};
+    char buffer[100] = {0};
     int j = 0;
 
     Range* ranges[50];
@@ -81,9 +81,13 @@ int main(void)
 
     for (int i = 0; i < fileSize; i++)
     {
-        if (fileContents[i] == ',')
+        if (fileContents[i] == ',' || i == fileSize - 1)
         {
-            buffer[j] = '\0';
+            if (fileContents[i] != ',')
+            {
+                buffer[j] = fileContents[i];
+            }
+            buffer[j + 1] = '\0';
             strcpy(ranges[k]->max, buffer);
             memset(buffer, 0, sizeof(buffer));
             j = 0;
@@ -103,7 +107,7 @@ int main(void)
         }
     }
 
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < k; i++)
     {
         printf("%s - %s\n", ranges[i]->min, ranges[i]->max);
     }
